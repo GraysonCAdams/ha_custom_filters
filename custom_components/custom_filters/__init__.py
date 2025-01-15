@@ -24,15 +24,15 @@ def setattr(dictionary, key, value):
 def init(*args):
     """Initialize filters"""
     env = _TemplateEnvironment(*args)
-    env.filters["dictionary"] = dictionary
+    env.filters["setattr"] = setattr
     return env
 
 
 template.TemplateEnvironment = init
-template._NO_HASS_ENV.filters["dictionary"] = dictionary
+template._NO_HASS_ENV.filters["setattr"] = setattr
 
 
 async def async_setup(hass, hass_config):
     tpl = template.Template("", template._NO_HASS_ENV.hass)
-    tpl._env.globals = set_dict_value
+    tpl._env.globals = setattr
     return True
