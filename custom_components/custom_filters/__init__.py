@@ -6,6 +6,7 @@ import re
 import urllib.parse
 import zlib
 import logging
+import copy
 
 from homeassistant.helpers import template
 
@@ -14,10 +15,10 @@ _LOGGER = logging.getLogger(__name__)
 _TemplateEnvironment = template.TemplateEnvironment
 
 
-## -- REPLACE ALL
 def setattr(dictionary, key, value):
-    dictionary[key] = value
-    return dictionary
+    cloned_dict = copy.deepcopy(original_dict)
+    cloned_dict[key] = value
+    return cloned_dict
 
 
 
